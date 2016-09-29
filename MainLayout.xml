@@ -321,10 +321,49 @@
             android:layout_gravity="center">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Hand"
                 android:textColor="#ffffff"
                 android:id="@+id/tvHandValue" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:gravity="right"
+                android:text="6max : " />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:id="@+id/tv6maxplace" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:gravity="right"
+                android:text="3max : " />
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:id="@+id/tv3maxplace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:gravity="right"
+                android:text="HU : " />
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:id="@+id/tvhuplace" />
 
         </LinearLayout>
 
