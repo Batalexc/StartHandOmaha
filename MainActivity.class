@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -39,16 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         handString = (TextView) findViewById(R.id.tvHandValue);
-
-
-        suitsClub = (LinearLayout) findViewById(R.id.suitsclub);
-        suitsDiamond = (LinearLayout) findViewById(R.id.suitsdiamond);
-        suitsHeart = (LinearLayout) findViewById(R.id.suitsheart);
-        suitsSpade = (LinearLayout) findViewById(R.id.suitsspade);
-
-        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.card_deck_layout);
-
-        LayoutInflater inflater = getLayoutInflater();
 
         idCard[0] = R.drawable.backgroundcard;
         idCard[1] = R.drawable.cardc2;
@@ -165,11 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewSquare.setOnLongClickListener(clear);
             isCardChecked[x] = false;
         }
-
-
+         
         cardsCheckedNow = 0;
         cardsCheckedMax = 4;
-
     }
 
     @Override
@@ -202,9 +191,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
+            
             Arrays.sort(suitsCount);
-
-
+            
             for (int y = 3; y > -1; y--) {
                 secondbracket = (suitsCount[y] % 1000000 > 0);
                 if (secondbracket) {
