@@ -1,0 +1,252 @@
+package com.example.starthandomaha;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    LinearLayout suitsClub, suitsDiamond, suitsHeart, suitsSpade;
+
+    int[] idCard = new int[53], idImageView = new int[53], suitsCount = new int[4], multiplic = new int[4];
+    int cardsCheckedNow, cardsCheckedMax, multiplic1;
+    boolean[] isCardChecked = new boolean[54];
+    TextView handString;
+    ImageView cardCheck;
+    String[] cardValue = {"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"};
+    String handValue, handValueSuit, lastString;
+    boolean secondbracket;
+    HashMap<String, Integer> mapHands;
+    double handsPlace;
+
+     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        String[] handsList = getResources().getStringArray(R.array.listhands);
+
+        mapHands = new HashMap<String, Integer>();
+        for (int i = 0; i < handsList.length; i++) {
+            mapHands.put(handsList[i], i);
+        }
+
+        handString = (TextView) findViewById(R.id.tvHandValue);
+
+
+        suitsClub = (LinearLayout) findViewById(R.id.suitsclub);
+        suitsDiamond = (LinearLayout) findViewById(R.id.suitsdiamond);
+        suitsHeart = (LinearLayout) findViewById(R.id.suitsheart);
+        suitsSpade = (LinearLayout) findViewById(R.id.suitsspade);
+
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.card_deck_layout);
+
+        LayoutInflater inflater = getLayoutInflater();
+
+        idCard[0] = R.drawable.backgroundcard;
+        idCard[1] = R.drawable.cardc2;
+        idCard[2] = R.drawable.cardc3;
+        idCard[3] = R.drawable.cardc4;
+        idCard[4] = R.drawable.cardc5;
+        idCard[5] = R.drawable.cardc6;
+        idCard[6] = R.drawable.cardc7;
+        idCard[7] = R.drawable.cardc8;
+        idCard[8] = R.drawable.cardc9;
+        idCard[9] = R.drawable.cardct;
+        idCard[10] = R.drawable.cardcj;
+        idCard[11] = R.drawable.cardcq;
+        idCard[12] = R.drawable.cardck;
+        idCard[13] = R.drawable.cardca;
+        idCard[14] = R.drawable.cardd2;
+        idCard[15] = R.drawable.cardd3;
+        idCard[16] = R.drawable.cardd4;
+        idCard[17] = R.drawable.cardd5;
+        idCard[18] = R.drawable.cardd6;
+        idCard[19] = R.drawable.cardd7;
+        idCard[20] = R.drawable.cardd8;
+        idCard[21] = R.drawable.cardd9;
+        idCard[22] = R.drawable.carddt;
+        idCard[23] = R.drawable.carddj;
+        idCard[24] = R.drawable.carddq;
+        idCard[25] = R.drawable.carddk;
+        idCard[26] = R.drawable.cardda;
+        idCard[27] = R.drawable.cardh2;
+        idCard[28] = R.drawable.cardh3;
+        idCard[29] = R.drawable.cardh4;
+        idCard[30] = R.drawable.cardh5;
+        idCard[31] = R.drawable.cardh6;
+        idCard[32] = R.drawable.cardh7;
+        idCard[33] = R.drawable.cardh8;
+        idCard[34] = R.drawable.cardh9;
+        idCard[35] = R.drawable.cardht;
+        idCard[36] = R.drawable.cardhj;
+        idCard[37] = R.drawable.cardhq;
+        idCard[38] = R.drawable.cardhk;
+        idCard[39] = R.drawable.cardha;
+        idCard[40] = R.drawable.cards2;
+        idCard[41] = R.drawable.cards3;
+        idCard[42] = R.drawable.cards4;
+        idCard[43] = R.drawable.cards5;
+        idCard[44] = R.drawable.cards6;
+        idCard[45] = R.drawable.cards7;
+        idCard[46] = R.drawable.cards8;
+        idCard[47] = R.drawable.cards9;
+        idCard[48] = R.drawable.cardst;
+        idCard[49] = R.drawable.cardsj;
+        idCard[50] = R.drawable.cardsq;
+        idCard[51] = R.drawable.cardsk;
+        idCard[52] = R.drawable.cardsa;
+
+        idImageView[1] = R.id.cardc2;
+        idImageView[2] = R.id.cardc3;
+        idImageView[3] = R.id.cardc4;
+        idImageView[4] = R.id.cardc5;
+        idImageView[5] = R.id.cardc6;
+        idImageView[6] = R.id.cardc7;
+        idImageView[7] = R.id.cardc8;
+        idImageView[8] = R.id.cardc9;
+        idImageView[9] = R.id.cardct;
+        idImageView[10] = R.id.cardcj;
+        idImageView[11] = R.id.cardcq;
+        idImageView[12] = R.id.cardck;
+        idImageView[13] = R.id.cardca;
+        idImageView[14] = R.id.cardd2;
+        idImageView[15] = R.id.cardd3;
+        idImageView[16] = R.id.cardd4;
+        idImageView[17] = R.id.cardd5;
+        idImageView[18] = R.id.cardd6;
+        idImageView[19] = R.id.cardd7;
+        idImageView[20] = R.id.cardd8;
+        idImageView[21] = R.id.cardd9;
+        idImageView[22] = R.id.carddt;
+        idImageView[23] = R.id.carddj;
+        idImageView[24] = R.id.carddq;
+        idImageView[25] = R.id.carddk;
+        idImageView[26] = R.id.cardda;
+        idImageView[27] = R.id.cardh2;
+        idImageView[28] = R.id.cardh3;
+        idImageView[29] = R.id.cardh4;
+        idImageView[30] = R.id.cardh5;
+        idImageView[31] = R.id.cardh6;
+        idImageView[32] = R.id.cardh7;
+        idImageView[33] = R.id.cardh8;
+        idImageView[34] = R.id.cardh9;
+        idImageView[35] = R.id.cardht;
+        idImageView[36] = R.id.cardhj;
+        idImageView[37] = R.id.cardhq;
+        idImageView[38] = R.id.cardhk;
+        idImageView[39] = R.id.cardha;
+        idImageView[40] = R.id.cards2;
+        idImageView[41] = R.id.cards3;
+        idImageView[42] = R.id.cards4;
+        idImageView[43] = R.id.cards5;
+        idImageView[44] = R.id.cards6;
+        idImageView[45] = R.id.cards7;
+        idImageView[46] = R.id.cards8;
+        idImageView[47] = R.id.cards9;
+        idImageView[48] = R.id.cardst;
+        idImageView[49] = R.id.cardsj;
+        idImageView[50] = R.id.cardsq;
+        idImageView[51] = R.id.cardsk;
+        idImageView[52] = R.id.cardsa;
+
+
+        for (int x = 1; x < 53; x++) {
+            ImageView viewSquare = (ImageView) findViewById(idImageView[x]);
+            viewSquare.setId(x);
+            viewSquare.setOnClickListener(this);
+            viewSquare.setOnLongClickListener(clear);
+            isCardChecked[x] = false;
+        }
+
+
+        cardsCheckedNow = 0;
+        cardsCheckedMax = 4;
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if ((view.getId() > 0) & (view.getId() < 53))
+            if ((!isCardChecked[view.getId()]) & (cardsCheckedNow < cardsCheckedMax)) {
+                cardsCheckedNow++;
+                isCardChecked[view.getId()] = true;
+                cardCheck = (ImageView) findViewById(view.getId());
+                cardCheck.setImageResource(idCard[0]);
+            } else {
+                if (isCardChecked[view.getId()]) {
+                    cardsCheckedNow--;
+                    isCardChecked[view.getId()] = false;
+                    cardCheck = (ImageView) findViewById(view.getId());
+                    cardCheck.setImageResource(idCard[view.getId()]);
+                }
+            }
+        if (cardsCheckedNow == 4) {
+            for (int x = 0; x < 4; x++) {
+                suitsCount[x] = 0;
+                multiplic[x] = 1000000;
+            }
+            handValue = "";
+            for (int x = 13; x > 0; x--) {
+                for (int y = 0; y < 4; y++) {
+                    if (isCardChecked[x + 13 * y]) {
+                        suitsCount[y] = suitsCount[y] + multiplic[y] * (x + 1);
+                        multiplic[y] = multiplic[y] / 100;
+                    }
+                }
+            }
+            Arrays.sort(suitsCount);
+
+
+            for (int y = 3; y > -1; y--) {
+                secondbracket = (suitsCount[y] % 1000000 > 0);
+                if (secondbracket) {
+                    handValueSuit = "(";
+                }
+                multiplic1 = 1000000;
+                while (suitsCount[y] > 0) {
+                    if (suitsCount[y] / multiplic1 > 0) {
+                        handValueSuit = handValueSuit + cardValue[suitsCount[y] / multiplic1 - 2];
+                        suitsCount[y] = suitsCount[y] % multiplic1;
+                        multiplic1 = multiplic1 / 100;
+                    }
+                }
+                if (secondbracket) {
+                    handValueSuit = handValueSuit + ")";
+                }
+                handValue = handValue + handValueSuit;
+                handValueSuit = "";
+            }
+            handsPlace = (mapHands.get(handValue) + 1) / 1.6432;
+            handsPlace = Math.round(handsPlace);
+            handsPlace = handsPlace / 100;
+            lastString = handValue + "   :   " + String.valueOf(handsPlace) + "%      ";
+            handString.setText(lastString);
+        }
+    }
+
+    View.OnLongClickListener clear = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View view) {
+            if (isCardChecked[view.getId()]) {
+                for (int x = 1; x < 53; x++) {
+                    if (isCardChecked[x]) {
+                        cardCheck = (ImageView) findViewById(x);
+                        cardCheck.setImageResource(idCard[x]);
+                        isCardChecked[x] = false;
+                        cardsCheckedNow = 0;
+                    }
+                }
+            }
+            return true;
+        }
+    };
+}
+
