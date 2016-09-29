@@ -2,10 +2,8 @@ package com.example.starthandomaha;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,32 +12,48 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    LinearLayout suitsClub, suitsDiamond, suitsHeart, suitsSpade;
-
     int[] idCard = new int[53], idImageView = new int[53], suitsCount = new int[4], multiplic = new int[4];
+    Integer[] arrHandPlaces;
     int cardsCheckedNow, cardsCheckedMax, multiplic1;
     boolean[] isCardChecked = new boolean[54];
-    TextView handString;
+    TextView handString, sixMaxPlace, threeMaxPlace, huPlace ;
     ImageView cardCheck;
     String[] cardValue = {"2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"};
     String handValue, handValueSuit, lastString;
     boolean secondbracket;
-    HashMap<String, Integer> mapHands;
+    HashMap<String, Integer[]> mapHands;
     double handsPlace;
 
-     @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] handsList = getResources().getStringArray(R.array.listhands);
+        String[] hands6maxList = getResources().getStringArray(R.array.list6maxhands);
+        String[] hands3maxList = getResources().getStringArray(R.array.list3maxhands);
+        String[] handshuList = getResources().getStringArray(R.array.listhuhands);
 
-        mapHands = new HashMap<String, Integer>();
-        for (int i = 0; i < handsList.length; i++) {
-            mapHands.put(handsList[i], i);
+        mapHands = new HashMap<String, Integer[]>();
+
+        for (int i = 0; i < hands6maxList.length; i++) {
+            arrHandPlaces = new Integer[3];
+            arrHandPlaces[0] = i;
+            mapHands.put(hands6maxList[i], arrHandPlaces);
+        }
+
+        for (int i = 0; i < hands3maxList.length; i++) {
+            arrHandPlaces = mapHands.get(hands3maxList[i]);
+            arrHandPlaces[1] = i;
+            mapHands.put(hands3maxList[i], arrHandPlaces);
+            arrHandPlaces = mapHands.get(handshuList[i]);
+            arrHandPlaces[2] = i;
+            mapHands.put(handshuList[i], arrHandPlaces);
         }
 
         handString = (TextView) findViewById(R.id.tvHandValue);
+        sixMaxPlace = (TextView) findViewById(R.id.tv6maxplace);
+        threeMaxPlace = (TextView) findViewById(R.id.tv3maxplace);
+        huPlace = (TextView) findViewById(R.id.tvhuplace);
 
         idCard[0] = R.drawable.backgroundcard;
         idCard[1] = R.drawable.cardc2;
@@ -156,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewSquare.setOnLongClickListener(clear);
             isCardChecked[x] = false;
         }
-         
+
         cardsCheckedNow = 0;
         cardsCheckedMax = 4;
     }
@@ -191,9 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-            
+
             Arrays.sort(suitsCount);
-            
+
             for (int y = 3; y > -1; y--) {
                 secondbracket = (suitsCount[y] % 1000000 > 0);
                 if (secondbracket) {
@@ -213,11 +227,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 handValue = handValue + handValueSuit;
                 handValueSuit = "";
             }
-            handsPlace = (mapHands.get(handValue) + 1) / 1.6432;
+            handString.setText(handValue);
+            arrHandPlaces = mapHands.get(handValue);
+
+            handsPlace = (arrHandPlaces[0] + 1) / 1.6432;
             handsPlace = Math.round(handsPlace);
             handsPlace = handsPlace / 100;
-            lastString = handValue + "   :   " + String.valueOf(handsPlace) + "%      ";
-            handString.setText(lastString);
+            lastString = String.valueOf(handsPlace) + "%";
+            sixMaxPlace.setText(lastString);
+
+            handsPlace = (arrHandPlaces[1] + 1) / 1.6432;
+            handsPlace = Math.round(handsPlace);
+            handsPlace = handsPlace / 100;
+            lastString = String.valueOf(handsPlace) + "%";
+            threeMaxPlace.setText(lastString);
+
+            handsPlace = (arrHandPlaces[2] + 1) / 1.6432;
+            handsPlace = Math.round(handsPlace);
+            handsPlace = handsPlace / 100;
+            lastString = String.valueOf(handsPlace) + "%";
+            huPlace.setText(lastString);
         }
     }
 
